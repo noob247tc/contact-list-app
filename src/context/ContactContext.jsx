@@ -11,7 +11,7 @@ export const useContacts = () =>{
     return context;
 };
 
-export const ContactProvider = ({ chidlren }) =>{
+export const ContactProvider = ({ children }) =>{
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError]= useState(null);
@@ -56,7 +56,50 @@ export const ContactProvider = ({ chidlren }) =>{
             return { success: true};
         } catch(err){
             setError(err.response?.data || 'Failed to add contact')
+            return {success: false, error: err.response?.data};
+        }finally{
+            setLoading(false);
         }
     }
+    const deleteContact = async (id)=>{
+        setLoading(true);
+        setError(null);
+        try{
+            await contactService.delete(id);
+            setContacts(contacts.filter(c => c.id !== id));
+            return { success : true};
+        }catch{
+            setError(err.response?.data || 'Failed to delete contact')
+            return { success: false , error: err.response?.data};
+        }finally{
+            setLoading(false)
+
+        }
+    };
+
+
+    useEffect(()=>{
+        fetchContacts();
+    }, []);
     
-}
+    const value = {
+    contacts,
+    loading,
+    error,
+    selectedContact,
+    currentContact,
+    setSelectedContact,
+    fetchContacts,
+    fetchContactById,
+    addContact,
+    updateContact,
+    deleteContact
+  };
+
+  return (
+    <ContactContext.Provider value={value}>
+      {children}
+    </ContactContext.Provider>
+  );
+    
+};

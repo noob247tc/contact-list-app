@@ -11,13 +11,9 @@ function App() {
   return (
     <ContactProvider>
       <BrowserRouter>
-        <div className="App">
-          <header className="app-header">
-            <h1>Contact List Application</h1>
-          </header>
-          <main>
-            <Routes>
-              <Route path="/" element={
+      <main>
+        <Routes>
+          <Route path="/" element={
                 <div className="home-page">
                   <section className="form-section">
                     <ContactForm />
@@ -29,9 +25,8 @@ function App() {
               } />
               <Route path="/contact-detail/:id" element={<ContactDetail />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-        </div>
+        </Routes>
+      </main>
       </BrowserRouter>
     </ContactProvider>
   );
