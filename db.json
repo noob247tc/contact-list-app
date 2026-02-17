@@ -1,0 +1,16 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Maria Anders",
+      "email": "maria@test.com",
+      "contact": "030-0074321"
+    },
+    {
+      "name": "asdfasdfsdf",
+      "email": "asdfsadfsd@gmail.com",
+      "contact": "123123213213213",
+      "id": 2
+    }
+  ]
+}
